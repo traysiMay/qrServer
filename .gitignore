@@ -1,8 +1,15 @@
 # Dependency directories
 node_modules/
 
-# next.js build output
-.next
+.env
 
 # typescript build output
 dist
+
+now_secrets.sh
+
+ormconfig.json
+
+.vscode/
+yarn-error.log
+yarn.lock

@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "dev": "ts-node-dev --project tsconfig.server.json server/index.ts",
+    "build": "tsc --project tsconfig.server.json",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "tbuild": "npm run build && npm run start"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.3.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "graphql": "^14.1.1",
+    "lottie-web": "^5.4.3",
+    "pg": "^7.8.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^0.16.0",
+    "typeorm": "^0.2.12"
+  },
+  "devDependencies": {
+    "@types/next": "^7.0.0",
+    "@types/react": "^16.6.0",
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.8",
+    "ts-node": "^7.0.1",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.2.0"
+  }
+}

@@ -1,11 +1,11 @@
 # Dependency directories
 node_modules/
-
+*.DS_Store
 .env
-
+devstatic/
 # typescript build output
 dist
-
+now.json
 now_secrets.sh
 
 ormconfig.json

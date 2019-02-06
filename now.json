@@ -1,9 +1,0 @@
-{
-    "version": 1,
-    "env": {
-        "postgres":"@postgres",
-        "host":"@gcloud_postgres_host",
-        "postgres_password":"@password",
-        "static_host": "https://afterparty.pizza"
-    }
-}

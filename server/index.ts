@@ -45,7 +45,7 @@ const schema = await createSchema()
   if (dev) app.use("/devstatic", express.static("devstatic"))
   console.log(dev)
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded());
+  app.use(bodyParser.urlencoded({extended:true}));
 
 
   app.get('/QR', async (req,res)=> {

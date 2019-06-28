@@ -9,7 +9,7 @@ export const BizzaHome = () => {
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: "${process.env.static_host}/static/bizza.json"
+            path: '${process.env.static_host}/static/bizza.json'
         })
 
     

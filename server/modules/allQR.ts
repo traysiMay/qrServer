@@ -8,8 +8,6 @@ import { QRCode } from "../entity/QRCode";
   export class AllQRResolver {
     @Query(() => [QRCode], {nullable:true})
     async allQR(): Promise<QRCode[] | null> {
-      console.log('all QR')
-
       return QRCode.find()
     }
   }

@@ -1,5 +1,5 @@
 let code = ''
-export const FourTet = (found:boolean, queryCode:string) => {
+export const BizzaBarty = (found:boolean, queryCode:string) => {
     let overlayCode = ''
     code = queryCode
     if (!found) {
@@ -91,6 +91,7 @@ export const FourTet = (found:boolean, queryCode:string) => {
         //		Init
         //////////////////////////////////////////////////////////////////////////////////
         // init renderer
+        AR();
         function AR(){
             setTimeout(()=>AEContainer.remove(), 4900)
             document.getElementById('begin').innerHTML= '<path fill="#0CEAFF" d="M38.9,251.7v2.6h8.7v11.6H34.4v-4.3h8.7v-3h-8.7v-11.2h13.2v4.3H38.9z"/><path fill="#0CEAFF" d="M69.6,254.5l-4.7,0c-0.7-1.9-2.4-3.1-4.6-3.1c-3,0-5.1,2.2-5.1,5.3c0,3.1,2.2,5.3,5.1,5.3c2.2,0,3.9-1.2,4.6-3.1l4.7,0c-0.9,4.3-4.7,7.4-9.4,7.4c-5.5,0-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6C64.9,247.1,68.7,250.1,69.6,254.5z"/><path fill="#0CEAFF" d="M83.1,265.9v-5.5h-6.4v5.5h-4.5v-18.5h15.4v18.5H83.1z M76.7,256.1h6.4v-4.4h-6.4V256.1z"/><path fill="#0CEAFF" d="M102.7,255.2v-7.8h4.5v18.5l-5.1,0l-6.8-11.5l0.3,3.7v7.8h-4.5v-18.5h5.1l6.8,11.4L102.7,255.2z"/><path fill="#0CEAFF" d="M127.1,251.7v14.2h-4.5v-14.2h-5v-4.3h14.6v4.3H127.1z"/><path fill="#0CEAFF" d="M146.2,265.9v-7.3h-7.1v7.3h-4.5v-18.5h4.5v6.9h7.1v-6.9h4.5v18.5H146.2z"/><path fill="#0CEAFF" d="M158.9,251.7v2.8h7.6v4.3h-7.6v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H158.9z"/><path fill="#0CEAFF" d="M196.8,256.7c0,2.6-0.9,4.8-2.5,6.5l2.5,3.3l-3.4,2.6l-2.6-3.4c-1.1,0.4-2.4,0.7-3.7,0.7c-5.5,0-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6C192.6,247.1,196.8,251.2,196.8,256.7z M182,256.7c0,3.1,2.2,5.3,5.1,5.3c3,0,5.1-2.2,5.1-5.3c0-3.1-2.2-5.3-5.1-5.3C184.2,251.4,182,253.6,182,256.7z"/><path fill="#0CEAFF" d="M211.9,259.3l2.7,6.6h-4.8l-2.7-6.6h-2.8v6.6h-4.5v-18.5h14.1v11.9H211.9z M204.2,255.5h5.5v-3.8h-5.5V255.5z"/><path fill="#0CEAFF" d="M243.7,254.5l-4.7,0c-0.7-1.9-2.4-3.1-4.6-3.1c-3,0-5.1,2.2-5.1,5.3c0,3.1,2.2,5.3,5.1,5.3c2.2,0,3.9-1.2,4.6-3.1l4.7,0c-0.9,4.3-4.7,7.4-9.4,7.4c-5.5,0-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6C239,247.1,242.8,250.1,243.7,254.5z"/><path fill="#0CEAFF" d="M264.9,256.7c0,5.5-4.2,9.6-9.7,9.6s-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6S264.9,251.2,264.9,256.7z M250.1,256.7c0,3.1,2.2,5.3,5.1,5.3c3,0,5.1-2.2,5.1-5.3c0-3.1-2.2-5.3-5.1-5.3C252.2,251.4,250.1,253.6,250.1,256.7z"/><path fill="#0CEAFF" d="M274.7,247.4c5.4,0,9.5,4,9.5,9.3c0,5.3-4.1,9.3-9.5,9.3h-6.9v-18.5H274.7z M272.3,261.6h2.4c2.9,0,5-2,5-5c0-2.9-2-5-5-5h-2.4V261.6z"/><path fill="#0CEAFF" d="M291.5,251.7v2.8h7.6v4.3h-7.6v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H291.5z"/><path fill="#0CEAFF" d="M322.5,265.9v-7.3h-7.1v7.3h-4.5v-18.5h4.5v6.9h7.1v-6.9h4.5v18.5H322.5z"/><path fill="#0CEAFF" d="M335.2,251.7v2.8h7.6v4.3h-7.6v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H335.2z"/><path fill="#0CEAFF" d="M358.8,259.3l2.7,6.6h-4.8l-2.7-6.6h-2.8v6.6h-4.5v-18.5h14.1v11.9H358.8z M351.1,255.5h5.5v-3.8h-5.5V255.5z"/><path fill="#0CEAFF" d="M368.9,251.7v2.8h7.6v4.3h-7.6v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H368.9z"/><path fill="#0CEAFF" d="M201.8,283.4v2.5H215v4.3h-2.7v7.4h-15v-18.5h10.5v4.3H201.8z M201.8,293.4h6.1v-3.1h-6.1V293.4z"/><path fill="#0CEAFF" d="M46.7,329.4v-18.5h4.5v14.2h6.3v-14.2h4.5v18.5H46.7z"/><path fill="#0CEAFF" d="M77.2,318.6v-7.8h4.5v18.5l-5.1,0l-6.8-11.5l0.3,3.7v7.8h-4.5v-18.5h5.1l6.8,11.4L77.2,318.6z"/><path fill="#0CEAFF" d="M103.5,317.9l-4.7,0c-0.7-1.9-2.4-3.1-4.6-3.1c-3,0-5.1,2.2-5.1,5.3c0,3.1,2.2,5.3,5.1,5.3c2.2,0,3.9-1.2,4.6-3.1l4.7,0c-0.9,4.3-4.7,7.4-9.4,7.4c-5.5,0-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6C98.9,310.5,102.6,313.6,103.5,317.9z"/><path fill="#0CEAFF" d="M124.7,320.1c0,5.5-4.2,9.6-9.7,9.6c-5.5,0-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6C120.5,310.5,124.7,314.7,124.7,320.1z M109.9,320.1c0,3.1,2.2,5.3,5.1,5.3c3,0,5.1-2.2,5.1-5.3c0-3.1-2.2-5.3-5.1-5.3C112.1,314.8,109.9,317,109.9,320.1z"/><path fill="#0CEAFF" d="M131.5,329.4l-5.8-18.5h4.8l3.9,12.7l3.9-12.7h4.8l-5.9,18.5H131.5z"/><path fill="#0CEAFF" d="M150,315.2v2.8h7.6v4.3H150v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H150z"/><path fill="#0CEAFF" d="M173.6,322.7l2.7,6.6h-4.8l-2.7-6.6h-2.8v6.6h-4.5v-18.5h14.1v11.9H173.6z M165.9,318.9h5.5v-3.8h-5.5V318.9z"/><path fill="#0CEAFF" d="M195.4,315.2v14.2h-4.5v-14.2h-5v-4.3h14.6v4.3H195.4z"/><path fill="#0CEAFF" d="M214.6,329.4v-7.3h-7.1v7.3h-4.5v-18.5h4.5v6.9h7.1v-6.9h4.5v18.5H214.6z"/><path fill="#0CEAFF" d="M227.2,315.2v2.8h7.6v4.3h-7.6v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H227.2z"/><path fill="#0CEAFF" d="M251.1,315.2v2.6h8.7v11.6h-13.2v-4.3h8.7v-3h-8.7v-11.2h13.2v4.3H251.1z"/><path fill="#0CEAFF" d="M268,315.2v2.8h7.6v4.3H268v2.9h8.2v4.3h-12.7v-18.5h12.7v4.3H268z"/><path fill="#0CEAFF" d="M297.7,317.9l-4.7,0c-0.7-1.9-2.4-3.1-4.6-3.1c-3,0-5.1,2.2-5.1,5.3c0,3.1,2.2,5.3,5.1,5.3c2.2,0,3.9-1.2,4.6-3.1l4.7,0c-0.9,4.3-4.7,7.4-9.4,7.4c-5.5,0-9.7-4.1-9.7-9.6c0-5.5,4.2-9.6,9.7-9.6C293,310.5,296.7,313.6,297.7,317.9z"/><path fill="#0CEAFF" d="M312.5,322.7l2.7,6.6h-4.8l-2.7-6.6h-2.8v6.6h-4.5v-18.5h14.1v11.9H312.5z M304.8,318.9h5.5v-3.8h-5.5V318.9z"/><path fill="#0CEAFF" d="M322.5,315.2v2.8h7.6v4.3h-7.6v2.9h8.2v4.3H318v-18.5h12.7v4.3H322.5z"/><path fill="#0CEAFF" d="M342.3,315.2v14.2h-4.5v-14.2h-5v-4.3h14.6v4.3H342.3z"/><path fill="#0CEAFF" d="M354.4,315.2v2.6h8.7v11.6h-13.2v-4.3h8.7v-3h-8.7v-11.2h13.2v4.3H354.4z"/><path fill="#0CEAFF" d="M372.2,327.1c0,1.5-1.2,2.6-2.7,2.6c-1.6,0-2.7-1.1-2.7-2.6s1.2-2.6,2.7-2.6C371,324.5,372.2,325.6,372.2,327.1z M367.2,322.5v-11.6h4.5v11.6H367.2z"/><path fill="#0CEAFF" d="M198.6,349.7c0,1.5-1.2,2.6-2.7,2.6s-2.7-1.1-2.7-2.6s1.2-2.6,2.7-2.6S198.6,348.2,198.6,349.7z M198.6,358.9c0,1.5-1.2,2.6-2.7,2.6s-2.7-1.1-2.7-2.6s1.2-2.6,2.7-2.6S198.6,357.4,198.6,358.9z"/><path fill="#0CEAFF" d="M209.2,342.6c5.4,0,9.5,4,9.5,9.3c0,5.3-4.1,9.3-9.5,9.3h-6.9v-18.5H209.2z M206.8,356.8h2.4c2.9,0,5-2,5-5c0-2.9-2-5-5-5h-2.4V356.8z"/>'
@@ -146,11 +147,11 @@ export const FourTet = (found:boolean, queryCode:string) => {
     
             var arToolkitSource = new THREEx.ArToolkitSource({
                 // to read from the webcam 
-                sourceType : 'webcam',
+                // sourceType : 'webcam',
                 
                 // to read from an image
-                // sourceType : 'image',
-                // sourceUrl : THREEx.ArToolkitContext.baseURL + '/devstatic/${code}_marker.png',		
+                 sourceType : 'image',
+                 sourceUrl : THREEx.ArToolkitContext.baseURL + '/devstatic/afterparty-pizza-emoji-kanji-marker.png',		
     
                 // to read from a video
                 // sourceType : 'video',
@@ -211,11 +212,11 @@ export const FourTet = (found:boolean, queryCode:string) => {
             scene.add(markerRoot1)
             var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
                 type : 'pattern',
-                patternUrl : THREEx.ArToolkitContext.baseURL + 'static/ar_stuff/patterns/fourtet.patt',
+                patternUrl : THREEx.ArToolkitContext.baseURL + 'static/ar_stuff/patterns/afterparty-pizza-emoji-kanji.patt',
             })
             
             video = document.createElement('video');
-            video.src = 'static/ar_stuff/videos/${code}.mp4';
+            video.src = 'static/ar_stuff/videos/lovecry.mp4';
             video.loop = true;
             video.load();
             

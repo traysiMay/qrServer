@@ -1,10 +1,13 @@
-export const Form = () => {
-
-    return (
-        /*html*/`
+export const Form = (topic: string, formEndPoint: string) => {
+  return /*html*/ `
         <head>
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
         <style>
+        body{
+    
+    background: url('./static/imgs/brizza.JPG') -8rem -6rem;
+    background-size: 30%;
+        }
          div#container {
             margin: 0 auto;
             margin-top: 12%;
@@ -32,13 +35,18 @@ export const Form = () => {
             height: 2em;
             background: red;
          }
+         h1 {
+             text-align: center;
+         }
         </style>
         </head>
         <div id="container">
-            <form id="form" action="/QRForm" method="post">
-            <div class="header">name</div><p><input type="text" name="name"></input></p>
-            <div class="header">email</div><p><input type="text" name="email"></input></p>
+        <h1>pizza?</h1>
+            <form id="form" action="/${formEndPoint}" method="post">
+            <p><input type="text" placeholder="name" name="name"></input></p>
+            <p><input type="text" placeholder="email" name="email"></input></p>
             <input id="code" name="code" type="hidden"></input>
+            <input id="topic" name="topic" type="hidden"></input>
             <p><input type="submit"/></p>
             </form>
         </div>
@@ -51,12 +59,12 @@ export const Form = () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const code = urlParams.get('code');
                 document.getElementById('code').value = code
+                document.getElementById('topic').value = '${topic}'
                 if (name.length === 0 || email.length === 0) {
                     return alert('either your name or email appears to be blank')
                 }
                 function validateEmail(e) {
                         var re = /\\S+@\\S+\\.\\S+/;
-                        console.log(re.test(e))
                         return re.test(e);
                 }
                 var validEmail = validateEmail(email)
@@ -66,7 +74,5 @@ export const Form = () => {
                 form.submit()
             })
         </script>
-        `
-    )
-}
-
+        `;
+};

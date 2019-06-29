@@ -21,7 +21,6 @@ const dev = process.env.NODE_ENV !== "production";
 if (dev) require("dotenv").config();
 
 const port = parseInt(process.env.PORT, 10) || 4000;
-console.log(port);
 const main = async () => {
   await createConnection({
     name: `default`,
@@ -67,12 +66,10 @@ const main = async () => {
   // four tet QR begin
   app.get("/QR", async (req, res) => {
     const { code } = req.query;
-    console.log(code);
 
     const QR = await QRCode.findOne({ code });
-    if (QR || !QR) {
-      // const { found } = QR;
-      const found = true;
+    if (QR) {
+      const { found } = QR;
       if (code === "jupiter" || code === "lovecry") {
         return res.send(FourTet(found, code));
       }
@@ -147,7 +144,6 @@ const main = async () => {
     res.send(Emails(ciphertext));
   });
   app.get("/", async (_, res) => {
-    console.log("wtf");
     res.send(BizzaHome());
   });
 

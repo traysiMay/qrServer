@@ -89,6 +89,25 @@ export const Raptor = (found: boolean, queryCode: string) => {
     <script src="/static/ar_stuff/models/OBJLoader.js"> </script>
     <script src="/static/ar_stuff/models/MTLLoader.js"> </script>
     <script src="https://sole.github.io/tween.js/build/tween.min.js"></script>
+    <script type="x-shader/x-vertex" id="vertexshader">
+			attribute float size;
+			varying vec3 vColor;
+			void main() {
+				vColor = color;
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_PointSize = size * ( 300.0 / -mvPosition.z );
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		</script>
+
+		<script type="x-shader/x-fragment" id="fragmentshader">
+			uniform sampler2D pointTexture;
+			varying vec3 vColor;
+			void main() {
+				gl_FragColor = vec4( vColor, 1.0 );
+				gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
+			}
+		</script>
     <script>
         //////////////////////////////////////////////////////////////////////////////////
         //		Init
@@ -138,6 +157,9 @@ export const Raptor = (found: boolean, queryCode: string) => {
 
             var textMesh1;
 
+            var particleSystem, uniforms, pGeometry;
+            var particles = 100000;
+
             var firstClick = false;
             // init scene and camera
             var scene	= new THREE.Scene();
@@ -180,11 +202,11 @@ export const Raptor = (found: boolean, queryCode: string) => {
     
             var arToolkitSource = new THREEx.ArToolkitSource({
                 // to read from the webcam 
-                // sourceType : 'webcam',
+                sourceType : 'webcam',
                 
                 // to read from an image
-                sourceType : 'image',
-                sourceUrl : THREEx.ArToolkitContext.baseURL + '/devstatic/raptor/pattern.png',		
+                //sourceType : 'image',
+                //sourceUrl : THREEx.ArToolkitContext.baseURL + '/devstatic/lovecry_marker.png',		
     
                 // to read from a video
                 // sourceType : 'video',
@@ -269,11 +291,78 @@ export const Raptor = (found: boolean, queryCode: string) => {
                 } );
 
                 const textGeo = new THREE.BufferGeometry().fromGeometry( geometry );
-                const materials = new THREE.MeshPhongMaterial( { color: 'red' } )
+                const materials = new THREE.MeshPhongMaterial( { color: 'red', opacity:.1 } )
 				textMesh1 = new THREE.Mesh( textGeo, materials );
                 textMesh1.position.z = -1
                 scene.add(textMesh1)
             } );
+
+            uniforms = {
+                pointTexture: { value: new THREE.TextureLoader().load("./static/imgs/spark.png")}
+            };
+
+            var shaderMaterial = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: document.getElementById('vertexshader').textContent,
+                fragmentShader: document.getElementById('fragmentshader').textContent,
+                blending: THREE.AdditiveBlending,
+                depthTest: false,
+                transparent:true,
+                vertexColors:true,
+            });
+
+            var radius = 200;
+
+            pGeometry = new THREE.BufferGeometry;
+
+            var positions = [];
+            var colors = [];
+            var sizes = [];
+
+            var color = new THREE.Color();
+
+            for (var i = 0; i < particles ; i++) {
+                positions.push((Math.random() * 2 - 1) * radius);
+                positions.push((Math.random() * 2 - 1) * radius);
+                positions.push((Math.random() * 2 - 1) * radius);
+
+                color.setHSL( i / particles, 1.0, 0.5 );
+                colors.push(color.r, color.g, color.b);
+
+                sizes.push(20);
+            }
+
+            pGeometry.addAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
+			pGeometry.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+			pGeometry.addAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1 ).setDynamic( true ));
+
+            particleSystem = new THREE.Points(pGeometry, shaderMaterial);
+
+           markerRoot1.add(particleSystem);
+
+            video = document.createElement('video');
+            video.src = 'static/ar_stuff/videos/sup.mp4';
+            video.loop = true;
+            video.load();
+            
+            var texture = new THREE.VideoTexture(video);
+            texture.needsUpdate;
+            texture.minFilter = THREE.LinearFilter;
+            texture.magFilter = THREE.LinearFilter;
+            texture.format = THREE.RGBFormat;
+            texture.crossOrigin = 'anonymous';
+    
+            var geometry    = new THREE.PlaneGeometry(10,10);
+            var material	= new THREE.MeshBasicMaterial({
+                map:texture,
+                opacity: 1,
+            }); 
+            mesh	= new THREE.Mesh( geometry, material );
+            mesh.rotation.x = -Math.PI/2;
+            mesh.material.opacity = .1;
+            mesh.material.transparent = true;
+            markerRoot1.add(mesh)
+
     
         })()
     
@@ -286,13 +375,47 @@ export const Raptor = (found: boolean, queryCode: string) => {
             
             var scaleScalar = 0;
             var tween = null;
+            var expanded = false;
+            var innerTimer = 0
             // update container.visible and scanningSpinner visibility
             onRenderFcts.push(function(m,t){
+                
                 if( markerRoot1.visible === true ) {
-                    if (scaleScalar < .01) {
+                    
+                    textMesh1.material.opacity += .01
+
+                    if (expanded){
+                        mesh.material.opacity += .01;
+                    if (mesh.material.opacity >= .9){
+                        video.play();
+                    }
+                    }
+      
+
+                    particleSystem.rotation.z = 0.01 * t;
+                    var sizes = pGeometry.attributes.size.array;
+                    for (var i = 0; i < particles; i++ ) {
+                        sizes[i] = 10 * (1 + Math.sin(0.1 * i + t));
+                    }
+                    pGeometry.attributes.size.needsUpdate = true;
+                    
+                    if (scaleScalar < .01 && !expanded) {
                         scaleScalar += .0001
                         textMesh1.scale.set(scaleScalar, scaleScalar, scaleScalar);
+                    } else {
+                        innerTimer += 1;
+                        if (innerTimer < 300) {
+                            expanded = false;
+                        } else {
+                            expanded = true;
+                        var sineWave = .07 * Math.sin(t * Math.PI * 2 * .05)
+                        var cosineWave = .07 * Math.cos(t * Math.PI * 2 * .05)
+
+                        textMesh1.scale.set(sineWave, cosineWave, sineWave);
+                        }
                     }
+
+  
                     raycaster.setFromCamera( mouse, camera );
                     if (tween){
                         TWEEN.update()
@@ -318,7 +441,7 @@ export const Raptor = (found: boolean, queryCode: string) => {
                     }
 
 
-                   textMesh1.rotation.y += .03;
+                   textMesh1.rotation.y += .01;
     
                     // CHECKER AREA
                     ${overlayCode}

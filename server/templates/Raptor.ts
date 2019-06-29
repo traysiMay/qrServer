@@ -1,5 +1,5 @@
 let code = "";
-export const Heart = (found: boolean, queryCode: string) => {
+export const Raptor = (found: boolean, queryCode: string) => {
   let overlayCode = "";
   code = queryCode;
   if (!found) {
@@ -136,6 +136,8 @@ export const Heart = (found: boolean, queryCode: string) => {
                 sphere,
                 object;
 
+            var textMesh1;
+
             var firstClick = false;
             // init scene and camera
             var scene	= new THREE.Scene();
@@ -169,6 +171,7 @@ export const Heart = (found: boolean, queryCode: string) => {
             // Create a camera
             //var camera = new THREE.Camera();
             var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 10000 );
+            camera.position.z = 10
             scene.add(camera);
     
             ////////////////////////////////////////////////////////////////////////////////
@@ -177,11 +180,11 @@ export const Heart = (found: boolean, queryCode: string) => {
     
             var arToolkitSource = new THREEx.ArToolkitSource({
                 // to read from the webcam 
-                 sourceType : 'webcam',
+                // sourceType : 'webcam',
                 
                 // to read from an image
-                // sourceType : 'image',
-                // sourceUrl : THREEx.ArToolkitContext.baseURL + '/devstatic/afterparty-pizza-emoji-kanji-marker.png',		
+                sourceType : 'image',
+                sourceUrl : THREEx.ArToolkitContext.baseURL + '/devstatic/raptor/pattern.png',		
     
                 // to read from a video
                 // sourceType : 'video',
@@ -242,7 +245,7 @@ export const Heart = (found: boolean, queryCode: string) => {
             scene.add(markerRoot1)
             var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
                 type : 'pattern',
-                patternUrl : THREEx.ArToolkitContext.baseURL + 'static/ar_stuff/patterns/afterparty-pizza-emoji-kanji.patt',
+                patternUrl : THREEx.ArToolkitContext.baseURL + 'static/ar_stuff/patterns/raptor/pattern.patt',
             })
             
             var light = new THREE.DirectionalLight( 0xffffff );
@@ -250,30 +253,27 @@ export const Heart = (found: boolean, queryCode: string) => {
             scene.add(light);
 
 
-            var loader = new THREE.OBJLoader();
-            new THREE.MTLLoader()
-                .setPath('static/ar_stuff/models/')            
-                .load('Love.mtl', function ( materials ) {
-                    materials.preload();
-                    new THREE.OBJLoader()
-                        .setMaterials( materials )
-                        .setPath('static/ar_stuff/models/')
-                        .load('Love.obj', function ( group ) {
-                            object = group.children[0];
-                            object.material.side = THREE.DoubleSide;
-                            var scalar = 0;
-                            object.scale.set(scalar, scalar, scalar);
-                            object.rotation.x = 4.3;
-                            object.rotation.y = 3.6;
-                            //object.rotation.z = .1;
+            var loader = new THREE.FontLoader();
+            loader.load(THREEx.ArToolkitContext.baseURL + 'static/js/libs/three/font.json', function ( font ) {
 
-                            object.position.z += .3
-                            object.position.x += .08
-                            object.material.color.set(1,0,0);
+                var geometry = new THREE.TextGeometry( 'ayO supp', {
+                    font: font,
+                    size: 100,
+                    height: 5,
+                    curveSegments: 12,
+                    bevelEnabled: true,
+                    bevelThickness: 10,
+                    bevelSize: 8,
+                    bevelOffset: 0,
+                    bevelSegments: 5
+                } );
 
-                            markerRoot1.add(object);
-                        })
-                })
+                const textGeo = new THREE.BufferGeometry().fromGeometry( geometry );
+                const materials = new THREE.MeshPhongMaterial( { color: 'red' } )
+				textMesh1 = new THREE.Mesh( textGeo, materials );
+                textMesh1.position.z = -1
+                scene.add(textMesh1)
+            } );
     
         })()
     
@@ -291,7 +291,7 @@ export const Heart = (found: boolean, queryCode: string) => {
                 if( markerRoot1.visible === true ) {
                     if (scaleScalar < .01) {
                         scaleScalar += .0001
-                        object.scale.set(scaleScalar, scaleScalar, scaleScalar);
+                        textMesh1.scale.set(scaleScalar, scaleScalar, scaleScalar);
                     }
                     raycaster.setFromCamera( mouse, camera );
                     if (tween){
@@ -301,7 +301,7 @@ export const Heart = (found: boolean, queryCode: string) => {
                     var intersects = raycaster.intersectObjects( markerRoot1.children );
                     if (firstClick) {
                         for ( var i = 0; i < intersects.length; i++ ) {
-                            var hColor = object.material.color; 
+                            var hColor = textMesh1.material.color; 
                             tween = new TWEEN.Tween(hColor) 
                                 .to({r: 1, g: 0, b: 0 }, 5000) 
                                 .easing(TWEEN.Easing.Quadratic.Out) 
@@ -318,7 +318,7 @@ export const Heart = (found: boolean, queryCode: string) => {
                     }
 
 
-                   object.rotation.y += .03;
+                   textMesh1.rotation.y += .03;
     
                     // CHECKER AREA
                     ${overlayCode}

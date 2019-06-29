@@ -10,23 +10,25 @@ import { BizzaHome } from "./templates/BizzaHome";
 import { FourTet } from "./templates/FourTet";
 import { BizzaBarty } from "./templates/BizzaBarty";
 import { Heart } from "./templates/Heart";
+import { Raptor } from "./templates/Raptor";
 import { Form } from "./templates/Form";
 import { TY } from "./templates/TY";
 import { Emails } from "./templates/Emails";
 import { createSchema } from "./utils/createSchema";
 import * as bodyParser from "body-parser";
 import * as CryptoJS from "crypto-js";
-
-const port = parseInt(process.env.PORT, 10) || 4000;
 const dev = process.env.NODE_ENV !== "production";
 if (dev) require("dotenv").config();
+
+const port = parseInt(process.env.PORT, 10) || 4000;
+console.log(port);
 const main = async () => {
   await createConnection({
     name: `default`,
     type: `postgres`,
     port: 5432,
     synchronize: true,
-    logging: false,
+    logging: dev ? true : false,
     host: process.env.host,
     username: process.env.postgres,
     database: process.env.postgres,
@@ -57,12 +59,20 @@ const main = async () => {
     res.send(Heart(true, "heart"));
   });
 
+  // raptor
+  app.get("/%F0%9F%A6%96", async (_, res) => {
+    res.send(Raptor(true, "raptor"));
+  });
+
   // four tet QR begin
   app.get("/QR", async (req, res) => {
     const { code } = req.query;
+    console.log(code);
+
     const QR = await QRCode.findOne({ code });
-    if (QR) {
-      const { found } = QR;
+    if (QR || !QR) {
+      // const { found } = QR;
+      const found = true;
       if (code === "jupiter" || code === "lovecry") {
         return res.send(FourTet(found, code));
       }
@@ -137,14 +147,12 @@ const main = async () => {
     res.send(Emails(ciphertext));
   });
   app.get("/", async (_, res) => {
+    console.log("wtf");
     res.send(BizzaHome());
   });
 
   const httpServer = http.createServer(app);
   apolloServer.applyMiddleware({ app, cors: true });
-
-  httpServer.listen(() => {
-    console.log(`> Ready on http://localhost:${port}`);
-  });
+  httpServer.listen(port);
 };
 main();

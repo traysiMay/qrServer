@@ -22,13 +22,14 @@ const dev = process.env.NODE_ENV !== "production";
 if (dev) require("dotenv").config();
 
 const port = parseInt(process.env.PORT, 10) || 4000;
+console.log(process.env.host);
 const main = async () => {
   await createConnection({
     name: `default`,
     type: `postgres`,
     port: 5432,
     synchronize: true,
-    logging: dev ? true : false,
+    logging: dev ? false : false,
     host: process.env.host,
     username: process.env.postgres,
     database: process.env.postgres,

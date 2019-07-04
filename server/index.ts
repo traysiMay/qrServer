@@ -28,6 +28,7 @@ const main = async () => {
     await createConnection({
       name: "default",
       type: `postgres`,
+      logging: true,
       url: process.env.DATABASE_URL,
       entities: [User, QRCode, SignUp]
     });

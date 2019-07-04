@@ -26,6 +26,7 @@ console.log(process.env.host);
 const main = async () => {
   if (process.env.deploy === "heroku") {
     await createConnection({
+      name: "default",
       type: `postgres`,
       url: process.env.DATABASE_URL
     });

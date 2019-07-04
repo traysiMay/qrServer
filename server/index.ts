@@ -12,6 +12,7 @@ import { BizzaBarty } from "./templates/BizzaBarty";
 import { Heart } from "./templates/Heart";
 import { Raptor } from "./templates/Raptor";
 import { Form } from "./templates/Form";
+import { Sherm } from "./templates/Sherm";
 import { TY } from "./templates/TY";
 import { Emails } from "./templates/Emails";
 import { createSchema } from "./utils/createSchema";
@@ -145,6 +146,10 @@ const main = async () => {
   });
   app.get("/", async (_, res) => {
     res.send(BizzaHome());
+  });
+
+  app.get("/shermField", async (_, res) => {
+    res.send(Sherm());
   });
 
   const httpServer = http.createServer(app);

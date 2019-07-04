@@ -24,18 +24,26 @@ if (dev) require("dotenv").config();
 const port = parseInt(process.env.PORT, 10) || 4000;
 console.log(process.env.host);
 const main = async () => {
-  await createConnection({
-    name: `default`,
-    type: `postgres`,
-    port: 5432,
-    synchronize: true,
-    logging: dev ? false : false,
-    host: process.env.host,
-    username: process.env.postgres,
-    database: process.env.postgres,
-    password: process.env.postgres_password,
-    entities: [User, QRCode, SignUp]
-  });
+  if (process.env.deploy === "heroku") {
+    await createConnection({
+      type: `postgres`,
+      url: process.env.DATABASE_URL
+    });
+  } else {
+    await createConnection({
+      name: `default`,
+      type: `postgres`,
+      port: 5432,
+      synchronize: true,
+      logging: dev ? false : false,
+      host: process.env.host,
+      username: process.env.postgres,
+      database: process.env.postgres,
+      password: process.env.postgres_password,
+      entities: [User, QRCode, SignUp]
+    });
+  }
+
   const schema = await createSchema();
   const apolloServer = new ApolloServer({
     schema

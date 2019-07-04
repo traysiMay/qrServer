@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "ts-node-dev --project tsconfig.server.json server/index.ts",
     "build": "tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start": "NODE_ENV=production node dist/index.js",
     "tbuild": "npm run build && npm run start"
   },
   "dependencies": {

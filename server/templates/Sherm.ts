@@ -10,13 +10,9 @@ export const Sherm = () => {
         ${shorm}
         <script>
          var shromz = document.getElementById('shromz').children
-         function clickJR(j) {
-          console.log(j)
-         }
          for (var i = 0; i < shromz.length; i++) {
-           console.log(shromz[i])
-       shromz[i].setAttribute('onclick', 'pulse()')
-       shromz[i].style.cursor = 'pointer'
+            shromz[i].setAttribute('onclick', 'pulse()')
+            shromz[i].style.cursor = 'pointer'
          }
          function pulse() {
            let counter = 0
@@ -38,7 +34,6 @@ export const Sherm = () => {
                   }
                   }
 
-                 // shromz[i].setAttribute('stroke-width', sinFunc+'px')
                  }
                 requestAnimationFrame(animate)
              }

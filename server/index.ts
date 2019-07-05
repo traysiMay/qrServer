@@ -166,7 +166,7 @@ const main = async () => {
   });
 
   const httpServer = http.createServer(app);
-  apolloServer.applyMiddleware({ app, cors: true });
+  apolloServer.applyMiddleware({ app, cors: { origin: "*" } });
   httpServer.listen(port);
 };
 main();

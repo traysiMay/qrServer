@@ -63,6 +63,11 @@ void main() {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.5/lottie.js"></script>
         <script>
     "use strict";
+    var width,height;
+window.onresize = window.onload = function() {
+    document.body.offsetWidth = 1443
+    document.body.offsetHeight = 4233
+}
     var animation = lottie.loadAnimation({
       container: document.getElementById('coyote'),
       path:"./static/coyote.json",

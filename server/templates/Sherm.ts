@@ -18,11 +18,10 @@ export const Sherm = () => {
         }
 
         #coyote {
-              position: absolute;
-    top: 1510px;
-    left: 5060px;
+            position: absolute;
+    top: 1820px;
+    left: 5580px;
     width: 100%;
-    transform: scale(2.5);
         }
         </style>
         </head>
@@ -67,10 +66,16 @@ void main() {
     var animation = lottie.loadAnimation({
       container: document.getElementById('coyote'),
       path:"./static/coyote.json",
-      renderer: 'canvas',
+      renderer: 'svg',
       loop: true,
       autoplay:false,
-      name:'beebe'
+      name:'beebe',
+    })
+    var coyote;
+    animation.addEventListener('DOMLoaded', () => {
+        console.log('wat')
+        coyote = document.getElementById('coyote').getElementsByTagName('svg')[0]
+        coyote.style.transform = 'scale(3)'
     })
 document.getElementById('coyote').addEventListener('click', () => {
   animation.play()

@@ -19,9 +19,9 @@ export const Sherm = () => {
 
         #coyote {
             position: absolute;
-    top: 1820px;
-    left: 5580px;
-    width: 100%;
+    top: 1598px;
+    left: 5358px;
+    width: 1000px;
         }
         </style>
         </head>

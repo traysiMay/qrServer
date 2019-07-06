@@ -19,8 +19,8 @@ export const Sherm = () => {
 
         #coyote {
             position: absolute;
-    top: 1598px;
-    left: 5358px;
+    top: 1661px;
+    left: 5408px;
     width: 1000px;
         }
         </style>
@@ -75,7 +75,7 @@ void main() {
     animation.addEventListener('DOMLoaded', () => {
         console.log('wat')
         coyote = document.getElementById('coyote').getElementsByTagName('svg')[0]
-        coyote.style.transform = 'scale(3)'
+        coyote.style.transform = 'scale(2)'
     })
 document.getElementById('coyote').addEventListener('click', () => {
   animation.play()

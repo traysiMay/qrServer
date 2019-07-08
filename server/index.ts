@@ -152,7 +152,9 @@ const main = async () => {
     );
   });
   app.get("/thepizzaloveemaillist420", async (_, res) => {
-    const emails = (await SignUp.find()).map(e => e.email);
+    const emails = (await SignUp.find()).map(e => {
+      return [e.email, e.name];
+    });
     const secret = "pizzalove420";
     const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(emails), secret);
     res.send(Emails(ciphertext));

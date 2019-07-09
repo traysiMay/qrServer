@@ -163,7 +163,7 @@ const main = async () => {
     res.send(BizzaHome());
   });
 
-  app.get("/shermField", async (_, res) => {
+  app.get("/shroomField", async (_, res) => {
     res.send(Sherm());
   });
 

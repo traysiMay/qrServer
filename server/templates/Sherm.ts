@@ -12,8 +12,11 @@ export const Sherm = () => {
             color: red;
             top: 31rem;
             margin-left: 38rem;
+            margin-bottom:10rem;
+            width:100%;
             opacity:0;
             pointer-events:none;
+            top:100px;
           }
           #coyote {
               position: absolute;
@@ -57,13 +60,15 @@ export const Sherm = () => {
       gl_FragColor = vec4( vec3( color * 0.5, sin( color + time / 2.5 ) * 0.75, color ), 1.0 );
     }
 </script>
+<script id="shader-test" type="notjs">
+</script>
 <script src="./static/js/libs/twgl-full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.5/lottie.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.5/lottie.js"></script>
 <script>
     "use strict";
+    const shaderTest = document.getElementById('shader-test')
     var width,height;
-
     window.onresize = window.onload = function() {
         document.body.offsetWidth = 1443
         document.body.offsetHeight = 4233
@@ -77,6 +82,7 @@ export const Sherm = () => {
       autoplay:false,
       name:'beebe',
     })
+    const canvas = document.querySelector('#c')
 
     var coyote;
     animation.addEventListener('DOMLoaded', () => {
@@ -121,9 +127,29 @@ export const Sherm = () => {
         }
 
       requestAnimationFrame(render);
-
+      
       var shromz = document.getElementById('shromz').children
       var ghosts = document.getElementById('ghosts').children
+      var amanita = document.getElementById('poison')
+      amanita.style.transformOrigin="50% 50%"
+      amanita.addEventListener('click', () => {
+          let skew = 0;
+          overlay.innerHTML = 'OH GOD YOU ARE FUCKED'
+          overlay.style.color = 'red'
+          overlay.style['margin-left'] = window.scrollX + 300 + 'px'
+          overlay.style.opacity = 1
+          function poisonLoop(){
+               overlay.style.opacity = Math.sin(skew)
+               document.body.style.background = 'black'
+
+              const newSkew = 'skewX('+Math.sin(skew)/skew+'deg) skewY('+skew*Math.cos(skew)+'deg)'
+              amanita.style.transform = newSkew
+              console.log(newSkew)
+              skew+=.1
+              requestAnimationFrame(poisonLoop)
+          }
+          poisonLoop()
+      })
 
       function pulse() {
           for (var i=0; i< ghosts.length; i++ ) {
@@ -133,7 +159,6 @@ export const Sherm = () => {
 
           let counter = 0
 
-          const canvas = document.querySelector('#c')
 
           function animate() {                
               counter += 1        

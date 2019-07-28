@@ -1,11 +1,21 @@
 export const Form = (topic: string, formEndPoint: string) => {
+  let bg = `url('./static/imgs/brizza.JPG') -8rem -6rem;`;
+  if (topic === "raptorhole") {
+    bg = `url('./static/imgs/mushroom.png') -8rem -6rem;`;
+  }
+
+  let formTitle = "pizza?";
+  if (topic === "raptorhole") {
+    formTitle = "rsvp ~ valencia room nov 2nd";
+  }
+
   return /*html*/ `
         <head>
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
         <style>
         body{
     
-    background: url('./static/imgs/brizza.JPG') -8rem -6rem;
+    background: ${bg};
     background-size: 30%;
         }
          div#container {
@@ -37,11 +47,13 @@ export const Form = (topic: string, formEndPoint: string) => {
          }
          h1 {
              text-align: center;
+             background:white;
+             opacity:.7;
          }
         </style>
         </head>
         <div id="container">
-        <h1>pizza?</h1>
+        <h1>${formTitle}?</h1>
             <form id="form" action="/${formEndPoint}" method="post">
             <p><input type="text" placeholder="name" name="name"></input></p>
             <p><input type="text" placeholder="email" name="email"></input></p>

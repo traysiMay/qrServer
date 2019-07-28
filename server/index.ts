@@ -102,6 +102,27 @@ const main = async () => {
     res.json({ found: true });
   });
 
+  app.get("/downtheraptorhole", async (req, res) => {
+    const { code } = req.query;
+    console.log(code);
+    if (code === "hehehehehehehehehehehe") {
+      res.send(Form("raptorhole", "downtheraptorhole"));
+    } else {
+      res.send("nothing to see here");
+    }
+  });
+
+  app.post("/downtheraptorhole", async (req, res) => {
+    const { name, email, topic } = req.body;
+    let signer = await SignUp.findOne({ name, email, hunt: topic });
+    if (!signer) {
+      signer = await SignUp.create({ name, email, hunt: topic }).save();
+    }
+    res.send(
+      '<body style="background:black;font-size:100px;color:white;">ty for signing up ~:) __ be on the lookout for updates</body>'
+    );
+  });
+
   // four tet send QR form
   app.get("/QRForm", async (req, res) => {
     const { code } = req.query;

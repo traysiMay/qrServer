@@ -24,6 +24,14 @@ export const Sherm = () => {
               left: 5408px;
               width: 1000px;
           }
+          #raptor {
+            position: absolute;
+    top: 2800px;
+    left: 5010px;
+    transform: scale(.5);
+    opacity: 0;
+    pointer-events:none;
+          }
         </style>
         </head>
         <body>        
@@ -93,11 +101,15 @@ export const Sherm = () => {
      animation.play()
     })
 
-    window.onload = () =>      console.log(document.getElementsByTagName('svg')[1])
+    window.onload = () =>   
         fetch('./static/imgs/ssss.svg').then(function(response) {
         return response.text();
       })
-      .then(svg => {document.getElementById('container').insertAdjacentHTML("afterbegin", svg);main();});
+      .then(svg => {document.getElementById('container').insertAdjacentHTML("afterbegin", svg);
+    // main();
+    }).then(() => fetch('./static/imgs/raptor.svg').then((resp) => {
+        return resp.text()
+    }).then(svg => {document.getElementById('container').insertAdjacentHTML("afterbegin",svg);main();}))
 
     function main() {
         const overlay = document.querySelector('#overlay')
@@ -183,9 +195,32 @@ export const Sherm = () => {
           }
           animate()
       } 
+      
+      function showmeRaptor() {
+          let counter = 0
+          const raptor = document.getElementById('raptor')
+          overlay.innerHTML = 'hi, u found me :)'
+          overlay.style.color = '#FFEF00'
+          overlay.style['margin-left'] = window.scrollX + 'px'
+          document.body.style.background = 'black'
+          setTimeout(() => window.location = '/downtheraptorhole?code=hehehehehehehehehehehe', 4000)
+          //document.body.style.opacity = 0
+          function animate(){
+              requestAnimationFrame(animate)
+              raptor.style.opacity = counter
+              //document.body.style.opacity = counter
+              overlay.style.opacity = counter
+              counter += .01
+          }
+          animate()
+      }
 
       for (var i = 0; i < shromz.length; i++) {
-          shromz[i].addEventListener('click', () => pulse())
+          if (shromz[i].id==="sherm64"){
+            shromz[i].addEventListener('click', () => showmeRaptor())
+          } else {
+            shromz[i].addEventListener('click', () => pulse())
+          }
           shromz[i].style.cursor = 'pointer'
       }
       function ghostVanish(index) {

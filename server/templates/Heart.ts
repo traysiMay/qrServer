@@ -311,9 +311,7 @@ export const Heart = (found: boolean, queryCode: string) => {
                                 .start(); 
                         mouse.x = 100;
                         mouse.y = 100;
-                        setTimeout(() => window.location='${
-                          process.env.static_host
-                        }'+'/heartForm', 7000);
+                        setTimeout(() => window.location='/heartForm', 7000);
                     }
                     }
 

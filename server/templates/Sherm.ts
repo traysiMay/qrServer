@@ -8,7 +8,7 @@ export const Sherm = () => {
         <meta property="fb:app_id"      content="406655189415060">
 
         <meta property="og:site_name"   content="shhh">
-<meta property="og:url"         content="https://afterparty.pizza/shroomfield">
+<meta property="og:url"         content="https://afterparty.pizza/static/imgs/invertedraptor_5.gif">
 <meta property="og:title"       content="shhhh">
 <meta property="og:description" content="shhhh">
 <meta property="og:type"        content="video.other">

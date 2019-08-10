@@ -8,11 +8,11 @@ export const Sherm = () => {
         <meta property="fb:app_id"      content="406655189415060">
 
         <meta property="og:site_name"   content="shhh">
-<meta property="og:url"         content="https://afterparty.pizza/static/imgs/invertedraptor_1.gif">
+<meta property="og:url"         content="https://afterparty.pizza/static/imgs/invertedraptor_4.gif">
 <meta property="og:title"       content="shhhh">
 <meta property="og:description" content="shhhh">
 <meta property="og:type"        content="video.other">
-<meta property="og:image"       content="https://afterparty.pizza/static/imgs/invertedraptor_1.gif">
+<meta property="og:image"       content="https://afterparty.pizza/static/imgs/invertedraptor_4.gif">
 <meta property="og:image:width"  content="800">
 <meta property="og:image:height" content="400">
         <style>

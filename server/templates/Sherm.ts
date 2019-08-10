@@ -35,11 +35,11 @@ export const Sherm = () => {
         </style>
         </head>
         <meta property="og:site_name"   content="shhh">
-<meta property="og:url"         content="./static/imgs/invertedraptor_1.gif">
+<meta property="og:url"         content="https://afterparty.pizza/static/imgs/invertedraptor_1.gif">
 <meta property="og:title"       content="shhhh">
 <meta property="og:description" content="shhhh">
 <meta property="og:type"        content="video.other">
-<meta property="og:image"       content="./static/imgs/invertedraptor_1.gif">
+<meta property="og:image"       content="https://afterparty.pizza/static/imgs/invertedraptor_1.gif">
 <meta property="og:image:width"  content="800">
 <meta property="og:image:height" content="400">
         <body>        

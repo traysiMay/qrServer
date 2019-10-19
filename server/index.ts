@@ -152,7 +152,7 @@ const main = async () => {
     );
   });
   app.get("/thepizzaloveemaillist420", async (_, res) => {
-    const emails = (await SignUp.find()).map(e => {
+    const emails = (await SignUp.find({ where: { hunt: "heart" } })).map(e => {
       return [e.email, e.name];
     });
     const secret = "pizzalove420";
